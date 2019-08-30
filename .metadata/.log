@@ -1,15 +1,15 @@
-!SESSION 2019-08-30 23:21:14.234 -----------------------------------------------
+!SESSION 2019-08-31 00:54:21.347 -----------------------------------------------
 eclipse.buildId=4.12.0.I20190605-1800
 java.version=1.8.0_221
 java.vendor=Oracle Corporation
 BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=de_DE
-Framework arguments:  -product org.eclipse.epp.package.jee.product
-Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+Framework arguments:  -product org.eclipse.epp.package.jee.product -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product -data C:\\SupportProject -product org.eclipse.epp.package.jee.product
 
-!ENTRY org.eclipse.egit.core 1 0 2019-08-30 23:23:15.467
+!ENTRY org.eclipse.egit.core 1 0 2019-08-31 00:54:23.540
 !MESSAGE Using Apache MINA sshd as ssh client.
 
-!ENTRY org.eclipse.egit.ui 2 0 2019-08-30 23:23:45.369
+!ENTRY org.eclipse.egit.ui 2 0 2019-08-31 00:54:28.835
 !MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
 user global configuration and to define the default location to store repositories: 'C:\Users\Chewbacca'. If this is
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
