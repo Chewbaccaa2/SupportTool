@@ -1,16 +1,10 @@
 package supporttool;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import sun.util.calendar.BaseCalendar;
 
 /**
  *
@@ -18,13 +12,17 @@ import sun.util.calendar.BaseCalendar;
  */
 public class Login extends javax.swing.JFrame {
 
+    Connection con;
+    java.awt.event.ActionEvent wasd;
     /**
      * Creates new form login
      */
     int mouseX;
     int mouseY;
+
     public Login() {
         initComponents();
+        con = SupportTool.setDatabase();
     }
 
     /**
@@ -92,6 +90,11 @@ public class Login extends javax.swing.JFrame {
         txtPassword.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtPassword.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtPassword.setToolTipText("Enter your password!");
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyReleased(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Username");
@@ -158,15 +161,15 @@ public class Login extends javax.swing.JFrame {
     private void jLabel2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseDragged
         int corX = evt.getXOnScreen() - mouseX;
         int corY = evt.getYOnScreen() - mouseY;
-        
+
         this.setLocation(corX, corY);
     }//GEN-LAST:event_jLabel2MouseDragged
 
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
         mouseX = evt.getX();
         mouseY = evt.getY();
-        
-        
+
+
     }//GEN-LAST:event_jLabel2MousePressed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
@@ -175,30 +178,32 @@ public class Login extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
 
+        String username = txtUsername.getText();
+        String password = txtPassword.getText();
+
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://37.218.254.108:3306/web278_support?useTimezone=true&serverTimezone=UTC", "sup", "Knorke1337");
-            
-            String username = txtUsername.getText();
-            String password = txtPassword.getText();
-            
             String query = "SELECT * from users WHERE name = ? AND password = ?";
             PreparedStatement statement = con.prepareStatement(query);
             statement.setString(1, username);
             statement.setString(2, password);
             ResultSet set = statement.executeQuery();
             if (set.next()) {
-                Main m = new Main();
+                Navigation m = new Navigation();
                 this.setVisible(false);
                 JOptionPane.showMessageDialog(null, "Login successfull!");
                 m.setVisible(true);
-            }   
-            else
+            } else {
                 JOptionPane.showMessageDialog(null, "Login unsuccessfull!");
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (SQLException e) {
         }
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void txtPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyReleased
+        if (evt.getKeyCode() == 10) {
+            btnLoginActionPerformed(wasd);
+        }
+    }//GEN-LAST:event_txtPasswordKeyReleased
 
     /**
      * @param args the command line arguments
@@ -214,16 +219,24 @@ public class Login extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
