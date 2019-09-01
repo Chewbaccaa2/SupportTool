@@ -22,7 +22,8 @@ public class SupportTool {
     public static void main(String[] args) {
         Login l = new Login();
         Navigation m = new Navigation();
-        l.setVisible(true);
+        //l.setVisible(true);
+        m.setVisible(true);
     }
 
     public static Connection setDatabase() {
